@@ -8,7 +8,6 @@
 	branch = gh-pages
 [submodule "_external/resources/wai-bcase"]
 	path = _external/resources/wai-bcase
-	url = https://github.com/w3c/wai-bcase.git
 	branch = master
 [submodule "_external/resources/wai-policies-prototype"]
 	path = _external/resources/wai-policies-prototype
