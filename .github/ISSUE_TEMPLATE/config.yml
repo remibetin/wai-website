@@ -7,5 +7,5 @@ contact_links:
     url: https://github.com/w3c/wcag/issues/
     about: WCAG discussions take place in the repository hosting WCAG data.
   - name: WCAG-EM Report Tool
-    url: https://github.com/mdn/mdn/issues/new/choose
+    url: https://github.com/w3c/wai-wcag-em-report-tool/issues/new/choose
     about: Issues concerning the WCAG-EM Report Tool should be reported using this link.
