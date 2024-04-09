@@ -17,3 +17,5 @@ body:
     id: description
     attributes:
       label: Add a description
+    validations:
+      required: true
