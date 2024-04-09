@@ -1,0 +1,37 @@
+name: "Content issue"
+description: Report a problem with content on WAI website.
+body:
+  - type: input
+    id: wai-id
+    attributes:
+      label: Resource shortname
+      description: The shortname of the resource, as displayed in the "Help improve this page" box at the bottom of the resource.
+  - type: input
+    id: wai-url
+    attributes:
+      label: Resource URL
+      description: The link to the page this issue is about or, if it's about multiple pages, an example or most important page.
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: What specific section or headline is this issue about?
+  - type: textarea
+    id: problem
+    attributes:
+      label: What information was incorrect, unhelpful, or incomplete?
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to see?
+  - type: textarea
+    id: references
+    attributes:
+      label: Do you have any supporting links, references, or citations?
+      description: Link to information that helps us confirm your issue.
+  - type: textarea
+    id: more-info
+    attributes:
+      label: Do you have anything more you want to share?
+      description: For example, steps to reproduce a bug, screenshots, screen recordings, or sample code
