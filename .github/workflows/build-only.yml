@@ -1,4 +1,4 @@
-name: Build-only
+name: Pre-validate before deploy
 
 on:
   workflow_dispatch
@@ -26,10 +26,13 @@ jobs:
         git submodule update --init --remote
     - name: Build and test with Jekyll
       run: |
-        bundle exec jekyll build --verbose --trace --config "_config.yml,_config_prod.yml" --profile
+        bundle exec jekyll build --profile --trace --config "_config.yml,_config_prod.yml" --profile
     - name: Generate list of resources
       run: |
         find ./_site -type f | sed 's,^\.\/_site,,' | sort > ./_site/manifest.txt
-    - name: check output
+    - name: Check list of files
       run: |
-        ls -la _site
+        cat ./_site/manifest.txt
+    - name: Check number of files
+      run: |
+        tree -al ./_site/ | tail -1
