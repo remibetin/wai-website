@@ -1,8 +1,8 @@
-name: Pre-validate deploy
+name: Check before deploy
 
 on:
   workflow_dispatch
-  
+
 jobs:
   build:
 
@@ -21,19 +21,34 @@ jobs:
       with:
         ruby-version: 3.3.3
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Setup NodeJS
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: "npm"
+    - name: Install Netlify
+      run: npm install netlify-cli@17 -g
     - name: Update Externals
       run: |
         git submodule update --init --remote
     - name: Build and test with Jekyll
       run: |
         bundle exec jekyll build --profile --trace --config "_config.yml,_config_prod.yml" --profile
+    - name: Generate Netlify preview
+      id: netlify_deploy
+      run: |
+        netlify deploy \
+          --dir _site \
+          --functions _functions\
+          --site ${{ secrets.NETLIFY_SITE_ID }} \
+          --auth ${{ secrets.NETLIFY_API_TOKEN }}
     - name: Generate list of resources
       run: |
         find ./_site -type f | sed 's,^\.\/_site,,' | sort > ./_site/manifest.txt
-    - name: Check list of files
-      run: |
-        cat ./_site/manifest.txt
     - name: Check number of files
       run: |
         tree -al ./_site/ | tail -1
         find ./_site -type f | cut -d/ -f2 | sort | uniq -c
+    - name: Check list of files
+      run: |
+        cat ./_site/manifest.txt
