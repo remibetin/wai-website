@@ -1,4 +1,4 @@
-name: Pre-validate before deploy
+name: Pre-validate deploy
 
 on:
   workflow_dispatch
