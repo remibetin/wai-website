@@ -36,4 +36,4 @@ jobs:
     - name: Check number of files
       run: |
         tree -al ./_site/ | tail -1
-        find . -type f | cut -d/ -f2 | sort | uniq -c
+        find ./_site -type f | cut -d/ -f2 | sort | uniq -c
