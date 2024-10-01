@@ -34,14 +34,6 @@ jobs:
     - name: Build and test with Jekyll
       run: |
         bundle exec jekyll build --profile --trace --config "_config.yml,_config_prod.yml" --profile
-    - name: Generate Netlify preview
-      id: netlify_deploy
-      run: |
-        netlify deploy \
-          --dir _site \
-          --functions _functions\
-          --site ${{ secrets.NETLIFY_SITE_ID }} \
-          --auth ${{ secrets.NETLIFY_API_TOKEN }}
     - name: Generate list of resources
       run: |
         find ./_site -type f | sed 's,^\.\/_site,,' | sort > ./_site/manifest.txt
@@ -52,3 +44,14 @@ jobs:
     - name: Check list of files
       run: |
         cat ./_site/manifest.txt
+    - name: Install dependencies
+      run: |
+        npm install
+    - name: Generate Netlify preview
+      id: netlify_deploy
+      run: |
+        netlify deploy \
+          --dir _site \
+          --functions _functions \
+          --site ${{ secrets.NETLIFY_SITE_ID }} \
+          --auth ${{ secrets.NETLIFY_API_TOKEN }}
