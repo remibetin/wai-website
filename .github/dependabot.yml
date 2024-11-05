@@ -11,6 +11,8 @@ updates:
       interval: "daily"
     groups:
       submodules:
-        patterns: "_external/resources/*"
+        patterns: 
+          - "_external/resources/*"
       data:
-        patterns: "_external/data"
+        patterns:
+          -  "_external/data"
