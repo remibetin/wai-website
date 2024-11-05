@@ -9,10 +9,3 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-    groups:
-      submodules:
-        patterns: 
-          - "_external/resources/*"
-      data:
-        patterns:
-          -  "_external/data"
