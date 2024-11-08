@@ -64,6 +64,7 @@ jobs:
         with:
           root: _site
       - name: Test with html-proofer
+        if: ${{ !cancelled() }}
         run: bundle exec htmlproofer _site --ignore-urls "/github.com/,/web.archive.org/"
         env:
           NOKOGIRI_USE_SYSTEM_LIBRARIES: true
