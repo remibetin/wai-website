@@ -1,0 +1,68 @@
+name: Continuous Integration (CI)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.3
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Build and test with Jekyll
+        run: |
+          bundle exec jekyll build --profile --trace --config "_config.yml,_config_prod.yml" --profile
+      - name: Generate list of resources
+        run: |
+          find ./_site -type f | sed 's,^\.\/_site,,' | sort > ./_site/manifest.txt
+      - name: Check number of files
+        run: |
+          tree -al ./_site/ | tail -1 && (cd ./_site/ && find . -type f | cut -d/ -f2 | sort | uniq -c)
+      - name: Check list of files
+        run: |
+          cat ./_site/manifest.txt
+
+  validate:
+    name: Validate HTML
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: ["3.3"]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Cache HTMLProofer
+        id: cache-htmlproofer
+        uses: actions/cache@v3
+        with:
+          path: tmp/.htmlproofer
+          key: ${{ runner.os }}-htmlproofer
+      - name: Build Site
+        run: bundle exec jekyll build --config "_config.yml,_config_prod.yml"
+      - name: Test with Nu Validator
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: _site
+      - name: Test with html-proofer
+        run: bundle exec htmlproofer _site --ignore-urls "/github.com/,/web.archive.org/"
+        env:
+          NOKOGIRI_USE_SYSTEM_LIBRARIES: true
