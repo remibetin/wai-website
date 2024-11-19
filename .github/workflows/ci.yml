@@ -23,7 +23,7 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Build and test with Jekyll
         run: |
-          bundle exec jekyll build --profile --trace --config "_config.yml,_config_prod.yml" --profile
+          bundle exec jekyll build --profile --trace --config "_config.yml" --profile
       - name: Generate list of resources
         run: |
           find ./_site -type f | sed 's,^\.\/_site,,' | sort > ./_site/manifest.txt
