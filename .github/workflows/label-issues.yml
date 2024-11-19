@@ -1,19 +1,56 @@
-name: "Issue Labeler"
-on:
-  issues:
-    types: [opened]
-
-permissions:
-  issues: write
-  contents: read
-
-jobs:
-  triage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: github/issue-labeler@v3.4
-        with:
-          configuration-path: .github/labeler.yml
-          enable-versioned-regex: 0
-          sync-labels: 1
-          repo-token: ${{ github.token }}
+124;ARIA
+1;CODE_OF_CONDUCT.md
+1;LICENSE.md
+70;WCAG2
+1;WCAG2A-Conformance.html
+1;WCAG2AA-Conformance.html
+1;WCAG2AAA-Conformance.html
+114;about
+1;adapt
+182;assets
+17;business-case
+1;cognitive
+1719;content-assets
+559;content-images
+6;courses
+32;curricula
+4;design-develop
+1;example-link
+1;expand-access
+1;favicon.ico
+1;feed.json
+1;feed.xml
+35;fundamentals
+1;index.html
+22;media
+1;meta
+216;news
+4;older-users
+1;package-lock.json
+1;package.json
+17;pages
+1;people
+30;people-use-web
+24;perspective-videos
+20;planning
+6;planning-and-managing
+57;policies
+1;pronunciation
+1;redirects.json
+3;research
+1;resources
+1;robots.txt
+10;roles
+1;search
+1;sitemap
+1;sitemap.xml
+236;standards-guidelines
+10;teach-advocate
+37;test-evaluate
+17;tips
+4;tools-list
+1;translations
+63;tutorials
+1;update
+16;videos
+146;wai-videos
