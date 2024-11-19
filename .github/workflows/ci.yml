@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    name: "Check output files"
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -58,7 +59,7 @@ jobs:
           path: tmp/.htmlproofer
           key: ${{ runner.os }}-htmlproofer
       - name: Build Site
-        run: bundle exec jekyll build --config "_config.yml,_config_prod.yml"
+        run: bundle exec jekyll build --config "_config.yml"
       - name: Test with Nu Validator
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
