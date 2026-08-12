@@ -34,3 +34,6 @@
 	path = _external/resources/wai-wcag-supplemental
 	url = https://github.com/w3c/wai-wcag-supplemental.git
 	branch = main
+[submodule "_external/resources/wai-about-wai"]
+	path = _external/resources/wai-about-wai
+	url = https://github.com/w3c/wai-about-wai.git
